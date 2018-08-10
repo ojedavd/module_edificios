@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="edificio_form_view">
+            <field name="name">edificio.form</field>
+            <field name="model">edificios.edificio</field>
+            <field name="arch" type="xml">
+                <form string="Edificio Form">
+                       <group>
+                            <field name="name"/>
+                            <field name="responsible_id"/>
+                            <field name="piso"/>
+                            <field name="sub"/>
+                        </group>
+                        <notebook>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="edificio_search_view">
+            <field name="name">edificio.search</field>
+            <field name="model">edificios.edificio</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="edificio_tree_view">
+            <field name="name">edificio.tree</field>
+            <field name="model">edificios.edificio</field>
+            <field name="arch" type="xml">
+                <tree string="Edificio Tree">
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="edificio_list_action">
+            <field name="name">Edificios</field>
+            <field name="res_model">edificios.edificio</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first edificio
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="menu_principal" name="Menu principal"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="menu_secundario" name="Menu secundario"
+                  parent="menu_principal"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="item_edificios" name="Edificios" parent="menu_secundario"
+                  action="edificio_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+    
+            <!-- session form view -->
+        <record model="ir.ui.view" id="piso_form_view">
+            <field name="name">piso.form</field>
+            <field name="model">edificios.piso</field>
+            <field name="arch" type="xml">
+                <form string="Piso Form">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="edificio_id"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- session tree/list view -->
+        <record model="ir.ui.view" id="piso_tree_view">
+            <field name="name">piso.tree</field>
+            <field name="model">edificios.piso</field>
+            <field name="arch" type="xml">
+                <tree string="Piso Tree">
+                    <field name="name"/>
+                    <field name="edificio_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="piso_list_action">
+            <field name="name">Pisos</field>
+            <field name="res_model">edificios.piso</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="item_pisos" name="Pisos"
+                  parent="menu_secundario"
+                  action="piso_list_action"/>
+    </data>
+</odoo>
